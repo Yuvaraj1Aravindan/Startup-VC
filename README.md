@@ -2,6 +2,9 @@
 
 A complete application for evaluating startup ideas against VC use cases with AI-powered scoring and explanations.
 
+> **👥 Team Members**: See [TEAM_ACCESS.md](./TEAM_ACCESS.md) for cloning, setup, and contribution guidelines.  
+> **🌐 Live Demo**: http://4.213.154.131 | **📚 API Docs**: http://4.213.154.131/docs
+
 ## Features
 
 - 🎯 **Smart Matching**: NLP-powered alignment scoring between startup ideas and VC pain points
