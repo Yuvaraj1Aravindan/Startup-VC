@@ -1,0 +1,26 @@
+{
+  "name": "vc-usecase-scoring",
+  "version": "1.0.0",
+  "description": "VC UseCase Scoring Platform - Match startup ideas against VC pain points",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "logs": "docker-compose logs -f",
+    "build": "docker-compose build",
+    "restart": "docker-compose restart",
+    "clean": "docker-compose down -v"
+  },
+  "keywords": [
+    "vc",
+    "startup",
+    "scoring",
+    "nlp",
+    "evaluation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

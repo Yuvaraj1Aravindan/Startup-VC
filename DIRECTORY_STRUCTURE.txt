@@ -1,0 +1,42 @@
+.
+├── backend
+│   ├── app
+│   │   ├── auth.py
+│   │   ├── config.py
+│   │   ├── database.py
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   ├── schemas.py
+│   │   └── scoring_engine.py
+│   ├── Dockerfile
+│   ├── pytest.ini
+│   ├── requirements.txt
+│   └── tests
+│       ├── __init__.py
+│       ├── test_api.py
+│       └── test_scoring.py
+├── DIRECTORY_STRUCTURE.txt
+├── docker-compose.yml
+├── frontend
+│   ├── Dockerfile
+│   ├── index.html
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── src
+│   │   ├── api.js
+│   │   ├── App.jsx
+│   │   ├── AuthContext.jsx
+│   │   ├── components
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   └── pages
+│   ├── tailwind.config.js
+│   └── vite.config.js
+├── package.json
+├── PROJECT_SUMMARY.md
+├── README.md
+├── start.bat
+└── start.sh
+
+8 directories, 32 files
