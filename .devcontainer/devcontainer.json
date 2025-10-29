@@ -1,8 +1,9 @@
 {
   "name": "VC-Startup Platform Development",
-  "dockerComposeFile": "../docker-compose.yml",
-  "service": "backend",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
   "workspaceFolder": "/workspace",
+  "runServices": ["postgres", "redis", "app"],
   
   "customizations": {
     "vscode": {
@@ -62,6 +63,8 @@
   },
 
   "postCreateCommand": "bash .devcontainer/setup.sh",
+  
+  "postStartCommand": "echo ''; echo '🚀 VC-Startup Platform Codespace is ready!'; echo ''; echo 'Quick start: ./start-all.sh'; echo 'Documentation: cat .devcontainer/README.md'; echo ''",
   
   "remoteUser": "root",
   
