@@ -1,0 +1,69 @@
+name: Nightly Database Backup
+
+on:
+  schedule:
+    # Run every day at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup-database:
+    name: Backup PostgreSQL Database
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.AZURE_VM_SSH_KEY }}
+
+      - name: Create database backup
+        run: |
+          ssh -o StrictHostKeyChecking=no azureuser@${{ secrets.AZURE_VM_IP }} << 'ENDSSH'
+            set -e
+            
+            echo "🗄️ Creating database backup..."
+            
+            TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+            BACKUP_DIR="/home/azureuser/backups"
+            BACKUP_FILE="$BACKUP_DIR/vc_db_backup_$TIMESTAMP.sql"
+            
+            # Create backup directory if it doesn't exist
+            mkdir -p $BACKUP_DIR
+            
+            # Create backup
+            docker exec vc_postgres_prod pg_dump -U postgres vc_db > $BACKUP_FILE
+            
+            # Compress backup
+            gzip $BACKUP_FILE
+            
+            echo "✓ Backup created: ${BACKUP_FILE}.gz"
+            
+            # Keep only last 7 days of backups
+            find $BACKUP_DIR -name "vc_db_backup_*.sql.gz" -mtime +7 -delete
+            
+            echo "✓ Old backups cleaned up"
+          ENDSSH
+
+      - name: Upload backup to GitHub
+        run: |
+          TIMESTAMP=$(date +%Y%m%d)
+          ssh -o StrictHostKeyChecking=no azureuser@${{ secrets.AZURE_VM_IP }} \
+            "cd /home/azureuser/backups && ls -t vc_db_backup_*.sql.gz | head -1" | \
+            xargs -I {} scp azureuser@${{ secrets.AZURE_VM_IP }}:/home/azureuser/backups/{} ./backup.sql.gz
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-backup-${{ github.run_number }}
+          path: backup.sql.gz
+          retention-days: 30
+
+      - name: Notify backup status
+        if: always()
+        run: |
+          if [ ${{ job.status }} == 'success' ]; then
+            echo "✅ Database backup successful!"
+          else
+            echo "❌ Database backup failed!"
+          fi

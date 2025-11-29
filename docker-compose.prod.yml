@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vc_postgres_prod
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-vc_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vc_password}
+      POSTGRES_DB: ${POSTGRES_DB:-vc_scoring_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - vc_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vc_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: vc_redis_prod
+    volumes:
+      - redis_data:/data
+    networks:
+      - vc_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    container_name: vc_backend_prod
+    environment:
+      - DATABASE_URL=postgresql://vc_user:vc_password@postgres:5432/vc_scoring_db
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-prod-secret-key-change-immediately}
+      - DEBUG=false
+      - ALLOWED_ORIGINS=http://4.213.154.131,http://localhost
+    networks:
+      - vc_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args:
+        - VITE_API_URL=http://4.213.154.131/api
+    container_name: vc_frontend_prod
+    networks:
+      - vc_network
+    depends_on:
+      - backend
+    restart: unless-stopped
+    expose:
+      - "80"
+
+  nginx:
+    image: nginx:alpine
+    container_name: vc_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - vc_network
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  vc_network:
+    driver: bridge
