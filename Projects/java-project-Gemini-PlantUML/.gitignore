@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.env
+.env.local
+
+# Build artifacts
+.gradle/
+build/
+dist/
+*.jar
+*.war
+
+# Logs
+*.log
+
+# Home directory (ignore everything in parent)
+../**/.aws/
+../**/.cache/
+../**/.config/
+../**/.docker/
+../**/.gradle/
+../**/.m2/
+../**/.npm/
+../**/.ssh/
+../**/.vscode/

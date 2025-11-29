@@ -1,0 +1,185 @@
+FTGO Microservices - Quick Reference Card
+═════════════════════════════════════════════════════════════════
+
+📍 WORKSPACE PATH:
+   /home/yuvaraj/Projects/java-project-Gemini-PlantUML/
+
+📊 WHAT WAS GENERATED:
+
+   ✓ 18 UML PlantUML diagrams
+   ✓ 3 comprehensive documentation files
+   ✓ 4 support scripts
+   ✓ FTGO microservices project (8 services, 22 modules)
+
+🎯 DIAGRAM CATEGORIES:
+
+   System Architecture:
+   • 01-architecture.puml                   - Overall system
+   • 06-event-driven-architecture.puml      - Event patterns
+   • 07-order-creation-sequence.puml        - Order flow
+
+   Domain Models:
+   • 02-order-service-domain.puml           - Order entity
+   • 03-consumer-service-domain.puml        - Consumer entity
+   • 04-restaurant-service-domain.puml      - Restaurant entity
+
+   Infrastructure:
+   • 05-api-gateway.puml                    - Gateway
+   • 08-service-dependencies.puml           - Dependencies
+   • 09-package-structure.puml              - Packages
+   • 10-component-interaction.puml          - Components
+
+   Service Classes (8 diagrams):
+   • 09-ftgo-*-service-classes.puml         - Real code analysis
+
+📚 KEY DOCUMENTATION:
+
+   1. PROJECT_SUMMARY.md               - Executive overview
+   2. INDEX.md                         - Complete file listing
+   3. uml-diagrams/README.md           - Detailed explanations
+   4. SETUP_GUIDE.sh                   - Installation guide
+
+🔧 SUPPORT SCRIPTS:
+
+   generate-uml-diagrams.sh            - Create diagrams (bash)
+   analyze-and-generate-uml.py         - Analyze code (Python)
+   SETUP_GUIDE.sh                      - Setup instructions
+   VIEW_DIAGRAMS.sh                    - Diagram reference
+
+🚀 VIEW DIAGRAMS - 3 OPTIONS:
+
+   OPTION 1: VS Code PlantUML Preview (Recommended)
+   ─────────────────────────────────────────────────
+   1. Install: PlantUML Preview extension
+   2. Open:    ftgo-application/uml-diagrams/01-architecture.puml
+   3. Press:   Alt+D
+
+   OPTION 2: Online PlantUML Viewer
+   ────────────────────────────────
+   1. Go to:   plantuml.com/plantuml/uml
+   2. Paste:   Content from any .puml file
+   3. View:    Rendered diagram
+
+   OPTION 3: Generate PNG/SVG
+   ──────────────────────────
+   1. Install: sudo apt-get install plantuml
+   2. Run:     plantuml *.puml  (in uml-diagrams folder)
+   3. View:    Generated .png files
+
+🏗️ 8 MICROSERVICES:
+
+   1. Order Service              - Core order management
+   2. Consumer Service           - Customer profiles
+   3. Restaurant Service         - Menu & catalog
+   4. Kitchen Service            - Ticket management
+   5. Delivery Service           - Logistics tracking
+   6. Accounting Service         - Payments & billing
+   7. Order History Service      - CQRS read model
+   8. API Gateway                - Client entry point
+
+💡 KEY PATTERNS DEMONSTRATED:
+
+   • Microservices Architecture
+   • Event-Driven Architecture (Kafka)
+   • Saga Pattern (Distributed Transactions)
+   • API Gateway Pattern
+   • CQRS Pattern (Command/Query Separation)
+   • Domain-Driven Design (DDD)
+   • Event Sourcing
+
+📋 TECH STACK:
+
+   Backend:       Spring Boot 2.x
+   Build:         Gradle
+   Database:      MySQL (per-service) + Elasticsearch
+   Messaging:     Apache Kafka + Eventuate Tram
+   Deployment:    Docker & Kubernetes
+   API Docs:      Swagger/OpenAPI
+
+📂 DIRECTORY STRUCTURE:
+
+   /ftgo-application/                  - Cloned project
+   /ftgo-application/uml-diagrams/     - All 18 diagrams
+   /*.md                               - Documentation
+   /*.sh, /*.py                        - Support scripts
+
+⚡ QUICK START:
+
+   # View all diagrams
+   bash VIEW_DIAGRAMS.sh
+
+   # Setup instructions
+   bash SETUP_GUIDE.sh
+
+   # Build project
+   cd ftgo-application
+   ./gradlew build -x test
+
+   # Run Order Service
+   ./gradlew :ftgo-order-service:bootRun
+
+📞 SUPPORT COMMANDS:
+
+   # Generate custom architecture diagrams
+   bash generate-uml-diagrams.sh
+
+   # Analyze Java code and generate class diagrams
+   python3 analyze-and-generate-uml.py
+
+   # View setup and troubleshooting
+   bash SETUP_GUIDE.sh
+
+   # View diagram reference
+   bash VIEW_DIAGRAMS.sh
+
+✨ WHAT YOU CAN DO:
+
+   ✓ View complete system architecture
+   ✓ Understand microservices design
+   ✓ Study event-driven patterns
+   ✓ Learn Spring Boot practices
+   ✓ Build and run services
+   ✓ Test APIs with Swagger
+   ✓ Explore source code
+   ✓ Modify diagrams
+   ✓ Generate documentation
+
+🎓 LEARNING PATH:
+
+   Beginner:
+   → Start with 01-architecture.puml
+   → Read PROJECT_SUMMARY.md
+   → Study domain model diagrams (02, 03, 04)
+
+   Intermediate:
+   → Review 06-event-driven-architecture.puml
+   → Examine 07-order-creation-sequence.puml
+   → Read uml-diagrams/README.md
+
+   Advanced:
+   → Study service class diagrams (09-ftgo-*)
+   → Explore source code
+   → Understand saga orchestration
+   → Review Kafka integration
+
+📊 STATISTICS:
+
+   Diagrams:           18 files (92 KB)
+   Documentation:      4 files (33 KB)
+   Scripts:            4 files (34 KB)
+   Microservices:      8 services
+   Gradle Modules:     22 modules
+   Total Size:         6.1 MB
+
+═════════════════════════════════════════════════════════════════
+
+✅ STATUS: All UML diagrams generated and documented!
+
+   Location: /home/yuvaraj/Projects/java-project-Gemini-PlantUML/
+   Diagrams: ftgo-application/uml-diagrams/
+
+═════════════════════════════════════════════════════════════════
+
+Created: November 29, 2025
+Project:  FTGO - Food Delivery Microservices Example
+Source:   https://github.com/microservices-patterns/ftgo-application
